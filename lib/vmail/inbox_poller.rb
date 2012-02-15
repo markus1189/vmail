@@ -37,6 +37,7 @@ module Vmail
         @ids = @ids + new_ids
         res = uncached_headers(new_ids).map {|m| m[:sender] }.join(", ")
         @notifier.call "Vmail: new email", "from #{res}"
+        print "\a"
       end
     rescue
       log "VMAIL_ERROR: #{[$!.message, $!.backtrace].join("\n")}"
